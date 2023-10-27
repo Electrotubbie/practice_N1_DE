@@ -1,11 +1,3 @@
-'''
-Считайте файл согласно вашему варианту и подсчитайте частоту каждого слова в тексте. В результирующем файле выведите полученные данные в порядке убывания:
-word1:freq1
-word2:freq2
-word3:freq3
-...
-wordN:freqN
-'''
 CASE_CHECK = True # учёт регистра (можно сменить на False чтоб не учитывать)
 FILE_NAME = 'task1/text_1_var_37'
 with open(FILE_NAME, 'r') as file:
@@ -20,8 +12,8 @@ clear_text = clear_text.strip() # обрезание лишних пробело
 
 # подсчёт повторяющихся слов
 list_text = clear_text.split(' ') # создание списка слов из текста, отделяя их пробелами
-word_list = set(list_text)
-word_list.discard('') # множество всех возможных слов
+word_list = set(list_text) # множество всех возможных слов
+word_list.discard('') # рудимент множественного пробела при сплите
 result = [
     {'word':word, 'freq':list_text.count(word)}
     for word in word_list
@@ -30,5 +22,5 @@ result.sort(key=lambda x: x['freq'], reverse=True)
 print(*[f'{elem["word"]}:{elem["freq"]}' for elem in result], sep='\n')
 
 # запись результата согласно заданию в файл
-with open(f'{FILE_NAME}_answer', 'w') as file:
+with open(f'{FILE_NAME}_answer.txt', 'w') as file:
     file.writelines([f'{elem["word"]}:{elem["freq"]}' + '\n' for elem in result])
